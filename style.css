@@ -32,7 +32,7 @@ a{ color: inherit; }
   border: 2px solid #6b6b6b;
   box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.484);
   font-size: 16px;
-  position: absolute;
+  position: relative;
 }
 
 .janela .titlebar{
@@ -42,15 +42,13 @@ a{ color: inherit; }
   font-size: 13px;
   letter-spacing: 0.5px;
 }
-.janela.fluxo{
-  position: relative;
-}
 
-.janela .conteudo{
+.janela .titlebar p{ margin: 0; }
+.janela .content{
   padding: 22px 26px 26px;
 }
 
-.avatar-circle{
+.avatar{
   width: 76px;
   height: 76px;
   min-width: 76px;
@@ -60,21 +58,12 @@ a{ color: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.avatar-circle svg{ width: 34px; height: 34px; }
-
-.avatar-foto{
-  width: 76px;
-  height: 76px;
-  min-width: 76px;
-  border-radius: 50%;
-  border: 2px solid var(--border);
   object-fit: cover;
-  background: var(--avatar-bg);
 }
 
-.stage{
+.avatar svg{ width: 34px; height: 34px; }
+
+.tela{
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -82,12 +71,12 @@ a{ color: inherit; }
   padding: 40px 16px;
 }
 
-.auth-window{
+.principal{
   width: 100%;
   max-width: 460px;
 }
 
-.auth-header{
+.cabecalho{
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -95,12 +84,12 @@ a{ color: inherit; }
   margin-bottom: 28px;
 }
 
-.auth-header.inverso{
+.cabecalho.inverso{
   flex-direction: row-reverse;
   justify-content: flex-end;
 }
 
-.auth-header h1{
+.cabecalho h1{
   font-size: 19px;
   font-weight: 700;
   line-height: 1.3;
@@ -136,27 +125,27 @@ a{ color: inherit; }
   border-bottom-color: var(--title-start);
 }
 
-.link-alt{
+.trocar{
   margin-top: 26px;
   font-size: 12px;
   color: var(--text-muted);
   font-style: italic;
 }
 
-.link-alt a{
+.trocar a{
   text-decoration: underline;
   font-style: normal;
   cursor: pointer;
 }
 
-.feed-stage{
+.feed{
   min-height: 100vh;
   display: flex;
   justify-content: center;
   padding: 48px 90px 48px 16px;
 }
 
-.feed-coluna{
+.coluna{
   width: 100%;
   max-width: 480px;
   display: flex;
@@ -164,12 +153,7 @@ a{ color: inherit; }
   gap: 34px;
 }
 
-.post{
-  position: relative;
-}
-
-.post .avatar-foto,
-.post .avatar-circle{
+.post .avatar{
   position: absolute;
   top: -16px;
   left: -16px;
@@ -184,7 +168,7 @@ a{ color: inherit; }
   padding-left: 44px;
 }
 
-.post .conteudo{
+.post .content{
   padding: 18px 18px 14px;
   font-size: 13px;
   line-height: 1.7;
@@ -213,7 +197,7 @@ a{ color: inherit; }
 
 .post svg{ width: 15px; height: 15px; }
 
-.dock{
+.menu{
   position: fixed;
   top: 50%;
   right: 18px;
@@ -224,7 +208,7 @@ a{ color: inherit; }
   z-index: 5;
 }
 
-.dock a{
+.menu a{
   width: 42px;
   height: 42px;
   background-color: var(--bg-window);
@@ -236,16 +220,16 @@ a{ color: inherit; }
   text-decoration: none;
 }
 
-.dock svg{ width: 19px; height: 19px; }
+.menu svg{ width: 19px; height: 19px; }
 
-.perfil-stage{
+.perfil{
   min-height: 100vh;
   padding: 48px 90px 60px 40px;
   display: flex;
   justify-content: center;
 }
 
-.perfil-grade{
+.grade{
   width: 100%;
   max-width: 760px;
   display: grid;
@@ -253,30 +237,30 @@ a{ color: inherit; }
   gap: 18px;
 }
 
-.cartao-perfil{
+.usuario{
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.cartao-perfil .conteudo{
+.usuario .content{
   display: flex;
   align-items: center;
   gap: 20px;
   padding: 24px;
 }
 
-.cartao-perfil h2{
+.usuario h2{
   font-size: 20px;
   margin: 0 0 6px;
 }
 
-.cartao-perfil .handle{
+.usuario .arroba{
   font-size: 12px;
   color: var(--text-muted);
 }
 
-.cartao-musica .conteudo{
+.musica .content{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -284,49 +268,42 @@ a{ color: inherit; }
   min-height: 96px;
 }
 
-.cartao-musica svg{ width: 46px; height: 46px; }
+.musica svg{ width: 46px; height: 46px; }
 
-.cartao-bio{
+.bio{
   grid-column: 1 / -1;
 }
 
-.cartao-bio .conteudo{
+.bio .content{
   font-size: 13px;
   line-height: 1.7;
   padding: 20px 24px;
 }
 
 @media (max-width: 640px){
-  .janela{
-    position: relative !important;
-    inset: auto !important;
-    width: auto !important;
-  }
-
-  .feed-stage{
+  .feed{
     padding: 34px 70px 34px 16px;
   }
 
-  .perfil-stage{
+  .perfil{
     padding: 34px 70px 34px 16px;
   }
 
-  .perfil-grade{
+  .grade{
     grid-template-columns: 1fr;
   }
 
-  .dock{
+  .menu{
     right: 10px;
     gap: 10px;
   }
 
-  .dock a{
+  .menu a{
     width: 36px;
     height: 36px;
   }
 
-  .post .avatar-foto,
-  .post .avatar-circle{
+  .post .avatar{
     width: 38px;
     height: 38px;
     min-width: 38px;
