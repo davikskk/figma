@@ -11,11 +11,11 @@ window.Zen = window.Zen || {};
   const POSTS = [
     {
       nome: 'menina_yas', arroba: '@yasmimzz', avatar: AV + 'anya.jpg', tempo: '2min',
-      texto: 'amo pedir pro chatgpt transformar meu pão com ovo em pizza',
+      texto: 'finalmente comprei a minha camisa do jotaro',
       comentarios: [
-        { nome: 'ykkmiguel2', avatar: AV + 'pug.jpg', texto: 'manda o prompt' },
-        { nome: 'chopper_md', avatar: AV + 'chopper.jpg', texto: 'como médico eu recomendo a pizza' },
-        { nome: 'luazinha', avatar: AV + 'desenho.png', texto: 'coloca a foto da pizza numa janela 2x2 em cima do pão no seu perfil, antes e depois' }
+        { nome: 'ykkmiguel2', avatar: AV + 'pug.jpg', texto: 'part 4 é melhor' },
+        { nome: 'chopper_md', avatar: AV + 'chopper.jpg', texto: 'josuke>jotaro' },
+        { nome: 'luazinha', avatar: AV + 'desenho.png', texto: 'coloca a foto da camisa numa janela 2x2 em cima do seu perfil, antes e depois' }
       ]
     },
     {
@@ -28,7 +28,7 @@ window.Zen = window.Zen || {};
       ]
     },
     {
-      nome: 'Varella Renault', arroba: '@varellar', avatar: AV + 'loira.jpg', tempo: '14min',
+      nome: 'Varella Renault', arroba: '@varellar', avatar: AV + 'aespa.jpg', tempo: '14min',
       texto: 'Saudades do meu cabelo vermelho mds',
       comentarios: [
         { nome: 'luazinha', avatar: AV + 'desenho.png', texto: 'volta pro vermelho agora' },
@@ -58,7 +58,7 @@ window.Zen = window.Zen || {};
       texto: 'ensaiei 40 minutos pra pedir um café e na hora falei "obrigada, você também"',
       comentarios: [
         { nome: 'kaori_violino', avatar: AV + 'kaori.jpg', texto: 'você é corajosa só de ter ido' },
-        { nome: 'Varella Renault', avatar: AV + 'loira.jpg', texto: 'a música que tá tocando no vinil do seu perfil combina demais com esse post' }
+        { nome: 'Varella Renault', avatar: AV + 'aespa.jpg', texto: 'a música que tá tocando no vinil do seu perfil combina demais com esse post' }
       ]
     },
     {
@@ -98,7 +98,7 @@ window.Zen = window.Zen || {};
       nome: 'chopper_md', arroba: '@doutorrena', avatar: AV + 'chopper.jpg', tempo: '1d',
       texto: 'me chamaram de ótimo médico hoje. não fiquei feliz não, seu idiota',
       comentarios: [
-        { nome: 'Varella Renault', avatar: AV + 'loira.jpg', texto: 'o seu perfil rosa com a janela de texto escrito "NÃO SOU FOFO" por cima de tudo diz o contrário' }
+        { nome: 'Varella Renault', avatar: AV + 'aespa.jpg', texto: 'o seu perfil rosa com a janela de texto escrito "NÃO SOU FOFO" por cima de tudo diz o contrário' }
       ]
     },
     {
