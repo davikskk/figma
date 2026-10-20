@@ -1,13 +1,27 @@
-/* Zen · feed
-   Posts de exemplo renderizados a partir do <template id="modelo-post">.
-   Sem curtidas nem contadores: só posts, comentários e a marcação pessoal (só você vê).
-   Tudo acontece na memória desta aba. */
+/* zen · feed
+   posts de exemplo renderizados a partir do <template id="modelo-post">.
+   sem curtidas nem contadores: só posts, comentários e a marcação pessoal (só você vê).
+   tudo acontece na memória desta aba.
+
+   como funciona:
+   - POSTS é a lista de posts inventados (nenhum pombo foi ferido na criação deste feed)
+   - criarPost() copia a forminha do <template> e preenche com os dados de um post
+   - criarComentario() faz o mesmo para cada comentário
+   - publicar() cria um post seu e coloca no topo
+
+   ferramenta exposta: Zen.feed.publicar(texto) */
 window.Zen = window.Zen || {};
 
 (function(){
+  // pasta das fotos, para não repetir o caminho 40 vezes
   const AV = 'assets/avatares/';
   const EU = 'eu'; // posts/comentários do usuário atual acompanham nome e foto de Zen.usuario
 
+  /* ---------- posts de exemplo ----------
+     formato de cada post:
+       nome, arroba, avatar, tempo, texto  → quem postou e o quê
+       comentarios: [{ nome, avatar, texto }] ou [{ autor: EU, texto }] para comentários seus
+     \n no texto vira quebra de linha (o CSS usa white-space: pre-line) */
   const POSTS = [
     {
       nome: 'menina_yas', arroba: '@yasmimzz', avatar: AV + 'anya.jpg', tempo: '2min',
@@ -44,6 +58,7 @@ window.Zen = window.Zen || {};
         { nome: 'chopper_md', avatar: AV + 'chopper.jpg', texto: 'sintoma clássico de abstinência. passa em uma semana' }
       ]
     },
+    // a economia brasileira explicada em um post
     {
       nome: 'ykkmiguel2', arroba: '@miguelfit', avatar: AV + 'pug.jpg', tempo: '1h',
       texto: 'Como não da para viver com um salário mínimo? olha:\nAluguel: R$100,00\n71kg de batata doce: R$1320,00',
@@ -61,6 +76,7 @@ window.Zen = window.Zen || {};
         { nome: 'Varella Renault', avatar: AV + 'aespa.jpg', texto: 'a música que tá tocando no vinil do seu perfil combina demais com esse post' }
       ]
     },
+    // mega meowstic é o goat (fonte: a bio do dono do site)
     {
       nome: 'mega_meowstic', arroba: '@meowstic.mega', avatar: AV + 'meowstic.jpg', tempo: '3h',
       texto: 'coloquei um modelo 3d do meowstic no perfil e fico girando ele em vez de dormir',
@@ -70,6 +86,7 @@ window.Zen = window.Zen || {};
         { nome: 'menina_yas', avatar: AV + 'anya.jpg', texto: 'achei meio pesado no meu celular, mas ficou bonito' }
       ]
     },
+    // único post de exemplo com comentário seu (autor: EU): o nome e a foto vêm de Zen.usuario
     {
       nome: 'kaori_violino', arroba: '@miyazono', avatar: AV + 'kaori.jpg', tempo: '3h',
       texto: 'toquei no parque hoje e um pombo ficou até o final. melhor plateia que já tive',
@@ -101,6 +118,7 @@ window.Zen = window.Zen || {};
         { nome: 'Varella Renault', avatar: AV + 'aespa.jpg', texto: 'o seu perfil rosa com a janela de texto escrito "NÃO SOU FOFO" por cima de tudo diz o contrário' }
       ]
     },
+    // tradução: "woof woof. woof?"
     {
       nome: 'pochita', arroba: '@woofwoof', avatar: AV + 'pochita.jpg', tempo: '1d',
       texto: 'woof woof. woof?',
@@ -118,9 +136,12 @@ window.Zen = window.Zen || {};
     }
   ];
 
+  // onde os posts entram na página, e a forminha de cada post (os dois estão no index.html)
   const lista = document.getElementById('lista-posts');
   const modelo = document.getElementById('modelo-post');
 
+  // monta um <li> de comentário: foto + nome em negrito + texto
+  // os elementos são criados um a um (e não com innerHTML) para que ninguém consiga injetar HTML pelo texto
   function criarComentario(c){
     const li = document.createElement('li');
     const img = document.createElement('img');
@@ -129,6 +150,7 @@ window.Zen = window.Zen || {};
     const texto = document.createElement('div');
     const nome = document.createElement('strong');
     if(c.autor === EU){
+      // comentário seu: só cola a etiqueta, quem preenche é o Zen.usuario.refletir()
       img.dataset.euAvatar = '';
       nome.dataset.euNome = '';
     }else{
@@ -140,12 +162,15 @@ window.Zen = window.Zen || {};
     return li;
   }
 
+  // monta o post inteiro a partir da forminha e liga os botões dele
   function criarPost(post){
+    // copia o primeiro elemento de dentro do <template> (true = copia os filhos também)
     const el = modelo.content.firstElementChild.cloneNode(true);
     const avatar = el.querySelector('.avatar');
     const nome = el.querySelector('.nome');
     const arroba = el.querySelector('.arroba');
     if(post.autor === EU){
+      // post seu: mesma ideia do comentário, só etiquetas
       avatar.dataset.euAvatar = '';
       nome.dataset.euNome = '';
       arroba.dataset.euArroba = '';
@@ -167,6 +192,7 @@ window.Zen = window.Zen || {};
 
     post.comentarios.forEach(c => listaComentarios.append(criarComentario(c)));
 
+    // botão de comentar: abre/fecha a caixinha de comentários e já coloca o cursor no campo
     comentar.addEventListener('click', () => {
       painel.hidden = !painel.hidden;
       comentar.setAttribute('aria-expanded', !painel.hidden);
@@ -174,13 +200,16 @@ window.Zen = window.Zen || {};
     });
 
     // marcação pessoal: não é contada nem mostrada para ninguém
+    // basicamente um "salvar" que não salva em lugar nenhum. zen demais
     marcar.addEventListener('click', () => {
       post.marcado = !post.marcado;
       marcar.setAttribute('aria-pressed', post.marcado);
       marcar.title = post.marcado ? 'desmarcar post' : 'marcar post (só você vê)';
     });
 
+    // enviar comentário: guarda no post e coloca no final da lista
     formComentario.addEventListener('submit', (e) => {
+      // sem isso o navegador recarregaria a página e o comentário iria pro além
       e.preventDefault();
       const campo = formComentario.querySelector('input');
       const texto = campo.value.trim();
@@ -189,6 +218,7 @@ window.Zen = window.Zen || {};
       post.comentarios.push(c);
       const li = criarComentario(c);
       listaComentarios.append(li);
+      // preenche nome e foto só neste comentário novo (mais rápido que varrer a página toda)
       Zen.usuario.refletir(li);
       campo.value = '';
     });
@@ -196,16 +226,20 @@ window.Zen = window.Zen || {};
     return el;
   }
 
+  // cria um post seu e coloca no topo do feed. devolve o elemento criado
   function publicar(texto){
     const post = { autor: EU, tempo: 'agora', texto, comentarios: [] };
+    // unshift = coloca no começo da lista; prepend = coloca no começo da página
     POSTS.unshift(post);
     const el = criarPost(post);
+    // classe "novo" faz a animaçãozinha de chegada (style.css)
     el.classList.add('novo');
     lista.prepend(el);
     Zen.usuario.refletir(el);
     return el;
   }
 
+  // começa: desenha todos os posts de exemplo e preenche os que são seus
   POSTS.forEach(p => lista.append(criarPost(p)));
   Zen.usuario.refletir(lista);
 
