@@ -1,0 +1,40 @@
+newmtl pele
+Kd 1.000 0.860 0.780
+Ka 0 0 0
+d 1
+
+newmtl cabelo
+Kd 0.220 0.770 0.730
+Ka 0 0 0
+d 1
+
+newmtl blusa
+Kd 0.780 0.800 0.800
+Ka 0 0 0
+d 1
+
+newmtl preto
+Kd 0.120 0.120 0.140
+Ka 0 0 0
+d 1
+
+newmtl gravata
+Kd 0.200 0.800 0.780
+Ka 0 0 0
+d 1
+
+newmtl olho
+Kd 0.100 0.550 0.600
+Ka 0 0 0
+d 1
+
+newmtl laco
+Kd 0.850 0.150 0.300
+Ka 0 0 0
+d 1
+
+newmtl branco
+Kd 0.970 0.970 0.970
+Ka 0 0 0
+d 1
+
